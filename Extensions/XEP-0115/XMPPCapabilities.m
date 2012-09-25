@@ -63,6 +63,12 @@
 **/
 #define XMLNS_DISCO_INFO  @"http://jabber.org/protocol/disco#info"
 #define XMLNS_CAPS        @"http://jabber.org/protocol/caps"
+// Jacky Jia 2012.09.25
+// hack for coccinella
+#define XMLNS_COCCI_CAPS        @"http://coccinella.sourceforge.net/protocol/caps"
+//#define XMLNS_COCCI_SERVERS     @"http://coccinella.sourceforge.net/protocol/servers"
+//#define XMLNS_COCCI_SERVERS_VER @"0.96.20"
+// -----
 
 /**
  * Application identifier.
@@ -667,6 +673,10 @@ static NSInteger sortFieldValues(NSXMLElement *value1, NSXMLElement *value2, voi
 	
 	 myCapabilitiesQuery = nil;
 	 myCapabilitiesC = nil;
+    // Jacky Jia 2012.09.25
+    // hack for coccinella
+//    myCapabilitiesX = nil;
+    // -----
 	
 	collectingMyCapabilities = YES;
 	
@@ -768,10 +778,33 @@ static NSInteger sortFieldValues(NSXMLElement *value1, NSXMLElement *value2, voi
 	//     node="http://code.google.com/p/xmppframework"
 	//     ver="QgayPKawpkPSDYmwT/WM94uA1u0="/>
 	
-	myCapabilitiesC = [[NSXMLElement alloc] initWithName:@"c" xmlns:XMLNS_CAPS];
+    // Jacky Jia 2012.09.25
+    // hack for coccinella
+//	myCapabilitiesC = [[NSXMLElement alloc] initWithName:@"c" xmlns:XMLNS_CAPS];
+//	[myCapabilitiesC addAttributeWithName:@"hash" stringValue:hashAlg];
+//	[myCapabilitiesC addAttributeWithName:@"node" stringValue:DISCO_NODE];
+//	[myCapabilitiesC addAttributeWithName:@"ver"  stringValue:hash];
+    
+//    myCapabilitiesX = [[NSXMLElement alloc] initWithName:@"x" xmlns:XMLNS_COCCI_SERVERS];
+//    [myCapabilitiesX addAttributeWithName:@"ver" stringValue:XMLNS_COCCI_SERVERS_VER];
+//    NSXMLElement *putget = [[NSXMLElement alloc] initWithName:@"ip"];
+//    [putget addAttributeWithName:@"protocol" stringValue:@"putget"];
+//    [putget addAttributeWithName:@"port" stringValue:@"8236"];
+//    [putget setStringValue:@"192.168.16.254"];
+//    [myCapabilitiesX addChild:putget];
+//    
+//    NSXMLElement *http = [[NSXMLElement alloc] initWithName:@"ip"];
+//    [http addAttributeWithName:@"protocol" stringValue:@"http"];
+//    [http addAttributeWithName:@"port" stringValue:@"8078"];
+//    [http setStringValue:@"192.168.16.254"];
+//    [myCapabilitiesX addChild:http];
+    
+    myCapabilitiesC = [[NSXMLElement alloc] initWithName:@"c" xmlns:XMLNS_CAPS];
 	[myCapabilitiesC addAttributeWithName:@"hash" stringValue:hashAlg];
-	[myCapabilitiesC addAttributeWithName:@"node" stringValue:DISCO_NODE];
+	[myCapabilitiesC addAttributeWithName:@"node" stringValue:XMLNS_COCCI_CAPS];
 	[myCapabilitiesC addAttributeWithName:@"ver"  stringValue:hash];
+
+    // -----
 	
 	// If the collection process started when the stream was connected,
 	// and ended up taking so long as to not be available when the presence was sent,
@@ -1541,6 +1574,11 @@ static NSInteger sortFieldValues(NSXMLElement *value1, NSXMLElement *value2, voi
 		}
 		else if (myCapabilitiesC)
 		{
+            // Jacky Jia 2012.09.25
+            // hack for coccinella
+//            NSXMLElement *x = [myCapabilitiesX copy];
+//            [presence addChild:x];
+            // -----
 			NSXMLElement *c = [myCapabilitiesC copy];
 			
 			[presence addChild:c];

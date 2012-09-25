@@ -22,6 +22,10 @@
 	
 	NSXMLElement *myCapabilitiesQuery; // Full list of capabilites <query/>
 	NSXMLElement *myCapabilitiesC;     // Hashed element <c/>
+    // Jacky Jia 2012.09.25
+    // hack for coccinella
+//    NSXMLElement *myCapabilitiesX;     // element <x/>
+    // -----
 	BOOL collectingMyCapabilities;
 	
 	NSMutableSet *discoRequestJidSet;

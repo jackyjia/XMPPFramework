@@ -301,6 +301,10 @@
 	password = myPassword;
 
 	NSError *error = nil;
+    // Jacky Jia 2012.09.25
+    // explicitly set the host ip
+    xmppStream.hostName = @"192.168.16.19";
+    // -----
 	if (![xmppStream connect:&error])
 	{
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error connecting" 
